@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Test Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .left-panel {
+            width: 20%;
+            background-color: #f4f4f4;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .right-panel {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-auto-rows: max(1fr, 20em);
+            width: 80%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        #manualEntryForm {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            grid-auto-rows: auto;
+            gap: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <h2>Options</h2>
+            <form action="/api/load-url" method="POST">
+                <label for="urlInput">Enter URL:</label>
+                <input name="urlInput" type="text" id="urlInput" placeholder="Enter URL here" />
+                <button type="submit">Load Data</button>
+            </form>
+            <h2>Manual Entry</h2>
+            <form id="manualEntryForm" action="/api/saved-data" method="POST">
+                <label for="entryDate">Date:</label>
+                <input type="date" name="entryDate" id="entryDate" required />
+
+                <label for="phInput">pH:</label>
+                <input name="phInput" type="number" step="0.01" id="phInput" placeholder="pH" required />
+
+                <label for="alkalinityInput">Alkalinity:</label>
+                <input name="alkalinityInput" type="number" step="0.01" id="alkalinityInput" placeholder="Alkalinity"
+                    required />
+
+                <label for="phosphateInput">Phosphate:</label>
+                <input type="number" step="0.01" id="phosphateInput" name="phosphateInput" placeholder="Phosphate"
+                    required />
+
+                <label for="saltInput">Salt:</label>
+                <input type="number" step="0.01" id="saltInput" name="saltInput" placeholder="Salt" required />
+
+                <label for="nitrateInput">Nitrate:</label>
+                <input type="number" step="0.01" id="nitrateInput" name="nitrateInput" placeholder="Nitrate" required />
+
+                <label for="nitriteInput">Nitrite:</label>
+                <input type="number" step="0.01" id="nitriteInput" name="nitriteInput" placeholder="Nitrite" required />
+
+                <label for="ammoniaInput">Ammonia:</label>
+                <input type="number" step="0.01" id="ammoniaInput" name="ammoniaInput" placeholder="Ammonia" required />
+
+                <label for="magnesiumInput">Magnesium:</label>
+                <input type="number" step="0.01" id="magnesiumInput" name="magnesiumInput" placeholder="Magnesium"
+                    required />
+
+                <label for="calciumInput">Calcium:</label>
+                <input type="number" step="0.01" id="calciumInput" name="calciumInput" placeholder="Calcium" required />
+
+                <button type="submit">Add Entry</button>
+            </form>
+
+            <h2>Video Stream</h2>
+            <!-- <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script> -->
+            <!-- <video id="video1" autoplay width="640" height="360"></video> -->
+            <!-- <video id="video2" autoplay width="640" height="360"></video> -->
+        </div>
+
+        <div class="right-panel" id="chartsContainer">
+
+        </div>
+    </div>
+
+    <script>
+
+        var socket = io.connect('http://localhost:5000');
+
+        let videoElement1 = document.getElementById("video1");
+        let videoElement2 = document.getElementById("video2");
+
+
+        async function getVideoDevices() {
+            const devices = await navigator.mediaDevices.enumerateDevices();
+            const videoDevices = devices.filter(device => device.kind === 'videoinput');
+            return videoDevices;
+        }
+
+
+        async function setupCamera1() {
+            try {
+                const videoDevices = await getVideoDevices();
+                if (videoDevices.length > 0) {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: videoDevices[0].deviceId } });
+                    videoElement1.srcObject = stream;
+                } else {
+                    console.error("No video devices found");
+                }
+            } catch (err) {
+                console.error('Error accessing camera 1: ', err);
+            }
+        }
+
+
+        async function setupCamera2() {
+            try {
+                const videoDevices = await getVideoDevices();
+                if (videoDevices.length > 1) {
+                    const stream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: videoDevices[1].deviceId } });
+                    videoElement2.srcObject = stream;
+                } else {
+                    console.error("Second camera not found");
+                }
+            } catch (err) {
+                console.error('Error accessing camera 2: ', err);
+            }
+        }
+
+        window.onload = () => {
+            setupCamera1();
+            setupCamera2();
+        };
+
+        let savedData = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchSavedData();
+        });
+
+        async function fetchSavedData() {
+            try {
+                const response = await fetch('/api/saved-data');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch saved data');
+                }
+                const data = await response.json();
+                savedData = data; // Update savedData from the server
+                renderCharts(savedData);
+            } catch (error) {
+                console.error('Error fetching saved data:', error);
+                alert('Failed to load saved data.');
+            }
+        }
+
+
+        function renderCharts(data) {
+            const container = document.getElementById('chartsContainer');
+            container.innerHTML = ''; // Clear previous charts
+
+            // Group data by measurement name
+            const groupedData = {};
+            data.forEach(entry => {
+                const date = entry.date;
+                entry.measurements.forEach(measurement => {
+                    if (!groupedData[measurement.name]) {
+                        groupedData[measurement.name] = { labels: [], values: [], unit: measurement.unit };
+                    }
+                    groupedData[measurement.name].labels.push(date);
+                    groupedData[measurement.name].values.push(measurement.value);
+                });
+            });
+
+            // Create a chart for each measurement type
+            Object.keys(groupedData).forEach((measurementName, index) => {
+                const chartContainer = document.createElement('div');
+                chartContainer.classList.add('chart-container');
+
+                const canvas = document.createElement('canvas');
+                canvas.id = `chart${index}`;
+                chartContainer.appendChild(canvas);
+                container.appendChild(chartContainer);
+
+                const ctx = canvas.getContext('2d');
+                const { labels, values, unit } = groupedData[measurementName];
+
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: `${measurementName} (${unit})`,
+                            data: values,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            fill: false,
+                            tension: 0.1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        aspectRatio: 2,
+                        plugins: {
+                            legend: { display: true, position: 'top' },
+                            title: { display: true, text: `${measurementName} (${unit})`, font: { size: 14 }, color: 'black', padding: { top: 20, bottom: 20 } },
+                            legend: { display: false }
+                        },
+                        scales: {
+                            x: {
+                                type: 'category',
+                                title: { display: true, text: '' }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                title: { display: true, text: 'Measurement Value' },
+                                suggestedMax: Math.max(...values) + (Math.max(...values) - Math.min(...values)) * 0.1
+                            },
+
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+
+</body>
+
+</html>

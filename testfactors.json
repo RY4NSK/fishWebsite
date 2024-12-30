@@ -1,0 +1,572 @@
+{
+    "members": [
+        {
+            "id": 62,
+            "abbreviation": "TEMP",
+            "name": "Temperature",
+            "description": "Temperature",
+            "measurementType": "Temperature",
+            "defaultUnitOfMeasure": "c"
+        },
+        {
+            "id": 1,
+            "abbreviation": "ABS",
+            "name": "Absorbed Light",
+            "description": "Absorbed Light",
+            "measurementType": "None",
+            "defaultUnitOfMeasure": null
+        },
+        {
+            "id": 2,
+            "abbreviation": "FCL",
+            "name": "Free Chlorine",
+            "description": "Free Chlorine",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 3,
+            "abbreviation": "TCL",
+            "name": "Total Chlorine",
+            "description": "Total Chlorine",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 4,
+            "abbreviation": "CCL",
+            "name": "Combined Chlorine",
+            "description": "Combined Chlorine",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 5,
+            "abbreviation": "BR",
+            "name": "Bromine",
+            "description": "Bromine",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 6,
+            "abbreviation": "BIG",
+            "name": "Biguanide",
+            "description": "Biguanide",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 7,
+            "abbreviation": "BSH",
+            "name": "Biguanide Shock",
+            "description": "Biguanide Shock",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 8,
+            "abbreviation": "PH",
+            "name": "pH",
+            "description": "pH",
+            "measurementType": "None",
+            "defaultUnitOfMeasure": null
+        },
+        {
+            "id": 9,
+            "abbreviation": "ALK",
+            "name": "Alkalinity",
+            "description": "Alkalinity / Carbonate Hardness",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 63,
+            "abbreviation": "ALKADJ",
+            "name": "Adjusted Alkalinity",
+            "description": "Adjusted Alkalinity",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 10,
+            "abbreviation": "HRD",
+            "name": "Total Hardness",
+            "description": "Total Hardness",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 11,
+            "abbreviation": "CHD",
+            "name": "Calcium Hardness",
+            "description": "Calcium Hardness",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 12,
+            "abbreviation": "CYA",
+            "name": "Cyanuric Acid",
+            "description": "Cyanuric Acid",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 13,
+            "abbreviation": "FE",
+            "name": "Total Iron",
+            "description": "Total Iron",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 14,
+            "abbreviation": "FRC",
+            "name": "Ferric Iron",
+            "description": "Ferric Iron",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 15,
+            "abbreviation": "FRS",
+            "name": "Ferrous Iron",
+            "description": "Ferrous Iron",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 16,
+            "abbreviation": "CU",
+            "name": "Copper",
+            "description": "Copper",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 17,
+            "abbreviation": "BOR",
+            "name": "Borate",
+            "description": "Borate",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 18,
+            "abbreviation": "PHO",
+            "name": "Phosphate",
+            "description": "Phosphate",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppb"
+        },
+        {
+            "id": 19,
+            "abbreviation": "SLT",
+            "name": "Salt",
+            "description": "Salt",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 20,
+            "abbreviation": "NAT",
+            "name": "Nitrate",
+            "description": "Nitrate",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 21,
+            "abbreviation": "NIT",
+            "name": "Nitrite",
+            "description": "Nitrite",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 22,
+            "abbreviation": "URE",
+            "name": "Urea",
+            "description": "Urea",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 23,
+            "abbreviation": "TUR",
+            "name": "Turbidity",
+            "description": "Turbidity",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 24,
+            "abbreviation": "ALU",
+            "name": "Aluminum",
+            "description": "Aluminum",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 25,
+            "abbreviation": "BAR",
+            "name": "Barium",
+            "description": "Barium",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 26,
+            "abbreviation": "BEN",
+            "name": "Benzotriazole",
+            "description": "Benzotriazole",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 27,
+            "abbreviation": "BRN",
+            "name": "Boron",
+            "description": "Boron",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 28,
+            "abbreviation": "CAD",
+            "name": "Cadmium",
+            "description": "Cadmium",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 29,
+            "abbreviation": "CAR",
+            "name": "Carbohydrazide",
+            "description": "Carbohydrazide",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 30,
+            "abbreviation": "CDX",
+            "name": "Chlorinediox",
+            "description": "Chlorinediox",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 31,
+            "abbreviation": "CLD",
+            "name": "Chloride",
+            "description": "Chloride",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 32,
+            "abbreviation": "CHR",
+            "name": "Chromium",
+            "description": "Chromium",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 33,
+            "abbreviation": "COB",
+            "name": "Cobalt",
+            "description": "Cobalt",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 34,
+            "abbreviation": "COD",
+            "name": "COD",
+            "description": "COD",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 35,
+            "abbreviation": "CLR",
+            "name": "Color",
+            "description": "Color",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 36,
+            "abbreviation": "CYD",
+            "name": "Cyanide",
+            "description": "Cyanide",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 37,
+            "abbreviation": "DEH",
+            "name": "DEHA",
+            "description": "DEHA",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 38,
+            "abbreviation": "O2",
+            "name": "Dissolved Oxygen",
+            "description": "Dissolved Oxygen",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 39,
+            "abbreviation": "ERY",
+            "name": "Erythorbicacid",
+            "description": "Erythorbicacid",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 40,
+            "abbreviation": "FLO",
+            "name": "Fluoride",
+            "description": "Fluoride",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 41,
+            "abbreviation": "HYD",
+            "name": "Hydrazine",
+            "description": "Hydrazine",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 42,
+            "abbreviation": "PXD",
+            "name": "Peroxide",
+            "description": "Peroxide",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 43,
+            "abbreviation": "HQN",
+            "name": "Hydroquinone",
+            "description": "Hydroquinone",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 44,
+            "abbreviation": "IOD",
+            "name": "Iodine",
+            "description": "Iodine",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 45,
+            "abbreviation": "LED",
+            "name": "Lead",
+            "description": "Lead",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 46,
+            "abbreviation": "MGN",
+            "name": "Manganese",
+            "description": "Manganese",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 47,
+            "abbreviation": "MRC",
+            "name": "Mercury",
+            "description": "Mercury",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 48,
+            "abbreviation": "KET",
+            "name": "Ketoxime",
+            "description": "Ketoxime",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 49,
+            "abbreviation": "MLB",
+            "name": "Molybdenum",
+            "description": "Molybdenum",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 50,
+            "abbreviation": "NKL",
+            "name": "Nickel",
+            "description": "Nickel",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 51,
+            "abbreviation": "OXD",
+            "name": "Oxidizer",
+            "description": "Oxidizer",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 52,
+            "abbreviation": "OZN",
+            "name": "Ozone",
+            "description": "Ozone",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 53,
+            "abbreviation": "PHE",
+            "name": "Phenol",
+            "description": "Phenol",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 54,
+            "abbreviation": "AMO",
+            "name": "Ammonia",
+            "description": "Ammonia",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 55,
+            "abbreviation": "TDS",
+            "name": "Total Dissolved Solids",
+            "description": "Total Dissolved Solids",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 56,
+            "abbreviation": "POT",
+            "name": "Potassium",
+            "description": "Potassium",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 57,
+            "abbreviation": "SIL",
+            "name": "Silica",
+            "description": "Silica",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 58,
+            "abbreviation": "SURF",
+            "name": "Surfactants",
+            "description": "Surfactants",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 59,
+            "abbreviation": "SULF",
+            "name": "Sulfide",
+            "description": "Sulfide",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 66,
+            "abbreviation": "SULFA",
+            "name": "Sulfate",
+            "description": "Sulfate",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 60,
+            "abbreviation": "TAN",
+            "name": "Tannin",
+            "description": "Tannin",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 61,
+            "abbreviation": "SAT",
+            "name": "Saturation Index",
+            "description": "Saturation Index",
+            "measurementType": "None",
+            "defaultUnitOfMeasure": null
+        },
+        {
+            "id": 64,
+            "abbreviation": "PHOS",
+            "name": "Phosphorus",
+            "description": "Phosphorus",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 65,
+            "abbreviation": "ZINC",
+            "name": "Zinc",
+            "description": "Zinc",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 67,
+            "abbreviation": "MAG",
+            "name": "Magnesium Hardness",
+            "description": "Magnesium Hardness",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 68,
+            "abbreviation": "CO2",
+            "name": "Carbon Dioxide",
+            "description": "Carbon Dioxide",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 70,
+            "abbreviation": "CAION",
+            "name": "Calcium (Ions)",
+            "description": "Calcium (Ions)",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 69,
+            "abbreviation": "MGION",
+            "name": "Magnesium (Ions)",
+            "description": "Magnesium (Ions)",
+            "measurementType": "Concentration",
+            "defaultUnitOfMeasure": "ppm"
+        },
+        {
+            "id": 71,
+            "abbreviation": "AIRTEMP",
+            "name": "Air Temperature",
+            "description": "Air Temperature",
+            "measurementType": "None",
+            "defaultUnitOfMeasure": null
+        }
+    ]
+}

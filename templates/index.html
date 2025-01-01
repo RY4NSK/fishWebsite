@@ -40,6 +40,14 @@
             grid-auto-rows: auto;
             gap: 0.5em;
         }
+
+        #video1 {
+            width: 100%;
+        }
+
+        #video2 {
+            width: 100%;
+        }
     </style>
 </head>
 
@@ -91,9 +99,9 @@
             </form>
 
             <h2>Video Stream</h2>
-            <!-- <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script> -->
-            <!-- <video id="video1" autoplay width="640" height="360"></video> -->
-            <!-- <video id="video2" autoplay width="640" height="360"></video> -->
+            <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+            <video id="video1" autoplay></video>
+            <video id="video2" autoplay></video>
         </div>
 
         <div class="right-panel" id="chartsContainer">
@@ -112,6 +120,7 @@
         async function getVideoDevices() {
             const devices = await navigator.mediaDevices.enumerateDevices();
             const videoDevices = devices.filter(device => device.kind === 'videoinput');
+            console.log('Video Devices:', videoDevices);
             return videoDevices;
         }
 
@@ -189,6 +198,8 @@
                 });
             });
 
+            const charts = [];
+
             // Create a chart for each measurement type
             Object.keys(groupedData).forEach((measurementName, index) => {
                 const chartContainer = document.createElement('div');
@@ -202,7 +213,7 @@
                 const ctx = canvas.getContext('2d');
                 const { labels, values, unit } = groupedData[measurementName];
 
-                new Chart(ctx, {
+                const chart = new Chart(ctx, {
                     type: 'line',
                     data: {
                         labels: labels,
@@ -234,12 +245,55 @@
                                 title: { display: true, text: 'Measurement Value' },
                                 suggestedMax: Math.max(...values) + (Math.max(...values) - Math.min(...values)) * 0.1
                             },
-
                         }
+                    }
+                });
+                charts.push(chart)
+
+                canvas.addEventListener('click', function (event) {
+
+                    const activePoints = chart.getElementsAtEventForMode(event, 'nearest', { intersect: true }, true);
+
+                    if (activePoints.length > 0) {
+                        const index = activePoints[0].index;
+                        
+
+                        const date = chart.data.labels[index]
+                       
+
+                        for (const chart of charts) {
+                            const measurementName = /^(.*) \(.*?\)/ .exec(chart.data.datasets[0].label)[1];
+
+                            groupedData[measurementName].labels.splice(index, 1);
+                            groupedData[measurementName].values.splice(index, 1);
+
+                            chart.data.labels = groupedData[measurementName].labels;
+                            chart.data.datasets[0].data = groupedData[measurementName].values;
+                            chart.update();
+                        }
+
+                        fetch('/api/delete-data', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                date: date,
+                            })
+                        })
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log('Backend response:', data);
+                            })
+                            .catch(error => {
+                                console.error('Error deleting data:', error);
+                            });
+
                     }
                 });
             });
         }
+
     </script>
 
 </body>

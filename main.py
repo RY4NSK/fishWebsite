@@ -131,6 +131,34 @@ def add_saved_data():
     return redirect("/")
 
 
+@app.route('/api/delete-data', methods=['POST'])
+def delete_data():
+    try:
+        data = request.get_json()
+
+        print("Received data:", data)
+
+        date = data.get('date')
+
+        if not date:
+            return jsonify({"error": "Missing required date"}), 400
+
+        with sqlite3.connect(DATABASE) as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                DELETE FROM saved_data
+                WHERE date = ?
+            """, (date, ))
+            conn.commit()
+
+        return jsonify({"success": "Date deleted successfully"})
+
+    except Exception as e:
+        print(f"Error during deletion: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+
 # Load test factors once
 with open("testfactors.json") as f:
     factors = json.load(f)

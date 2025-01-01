@@ -41,11 +41,8 @@
             gap: 0.5em;
         }
 
-        #video1 {
-            width: 100%;
-        }
-
-        #video2 {
+        .video {
+            display: flex;
             width: 100%;
         }
     </style>
@@ -99,9 +96,10 @@
             </form>
 
             <h2>Video Stream</h2>
-            <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
-            <video id="video1" autoplay></video>
-            <video id="video2" autoplay></video>
+                <div class="video">
+                    <img src="/video_feed1" alt="Camera 1 Stream" style="width: 100%; height: auto;">
+                    <img src="/video_feed2" alt="Camera 2 Stream" style="width: 100%; height: auto;">
+                </div>
         </div>
 
         <div class="right-panel" id="chartsContainer">
@@ -111,53 +109,6 @@
 
     <script>
 
-        var socket = io.connect('http://localhost:5000');
-
-        let videoElement1 = document.getElementById("video1");
-        let videoElement2 = document.getElementById("video2");
-
-
-        async function getVideoDevices() {
-            const devices = await navigator.mediaDevices.enumerateDevices();
-            const videoDevices = devices.filter(device => device.kind === 'videoinput');
-            console.log('Video Devices:', videoDevices);
-            return videoDevices;
-        }
-
-
-        async function setupCamera1() {
-            try {
-                const videoDevices = await getVideoDevices();
-                if (videoDevices.length > 0) {
-                    const stream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: videoDevices[0].deviceId } });
-                    videoElement1.srcObject = stream;
-                } else {
-                    console.error("No video devices found");
-                }
-            } catch (err) {
-                console.error('Error accessing camera 1: ', err);
-            }
-        }
-
-
-        async function setupCamera2() {
-            try {
-                const videoDevices = await getVideoDevices();
-                if (videoDevices.length > 1) {
-                    const stream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: videoDevices[1].deviceId } });
-                    videoElement2.srcObject = stream;
-                } else {
-                    console.error("Second camera not found");
-                }
-            } catch (err) {
-                console.error('Error accessing camera 2: ', err);
-            }
-        }
-
-        window.onload = () => {
-            setupCamera1();
-            setupCamera2();
-        };
 
         let savedData = [];
 
@@ -256,13 +207,13 @@
 
                     if (activePoints.length > 0) {
                         const index = activePoints[0].index;
-                        
+
 
                         const date = chart.data.labels[index]
-                       
+
 
                         for (const chart of charts) {
-                            const measurementName = /^(.*) \(.*?\)/ .exec(chart.data.datasets[0].label)[1];
+                            const measurementName = /^(.*) \(.*?\)/.exec(chart.data.datasets[0].label)[1];
 
                             groupedData[measurementName].labels.splice(index, 1);
                             groupedData[measurementName].values.splice(index, 1);

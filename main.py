@@ -1,10 +1,13 @@
-from flask import Flask, redirect, render_template, request, jsonify
+from flask import Flask, redirect, render_template, request, jsonify, Response
 import requests
 import sqlite3
 from datetime import datetime
 import json
 from flask_cors import CORS
+import cv2
 from urllib.parse import urlparse
+import time
+
 
 app = Flask(__name__)
 
@@ -156,9 +159,7 @@ def delete_data():
     except Exception as e:
         print(f"Error during deletion: {e}")
         return jsonify({"error": str(e)}), 500
-
-
-
+    
 # Load test factors once
 with open("testfactors.json") as f:
     factors = json.load(f)
@@ -168,6 +169,39 @@ def getFactorName(id):
         if member["id"] == id:
             return member["name"]
     return "Unknown Factor"
+
+
+camera1 = cv2.VideoCapture(1)
+camera2 = cv2.VideoCapture(0)
+
+camera1.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+camera1.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+camera2.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
+def generate_frames(camera):
+    while camera.isOpened():
+        success, frame = camera.read()
+        if not success:
+            # Log or handle the case where the camera stops providing frames
+            print("Camera read failed")
+            break
+        else:
+            ret, buffer = cv2.imencode('.jpg', frame)
+            if not ret:
+                print("Frame encoding failed")
+                continue
+            frame = buffer.tobytes()
+            yield (b'--frame\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+@app.route('/video_feed1')
+def video_feed1():
+    return Response(generate_frames(camera1), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/video_feed2')
+def video_feed2():
+    return Response(generate_frames(camera2), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 if __name__ == "__main__":
     init_db()  # Initialize the database

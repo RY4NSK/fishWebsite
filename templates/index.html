@@ -43,7 +43,7 @@
 
         .video {
             display: flex;
-            width: 100%;
+           
         }
     </style>
 </head>
@@ -97,8 +97,8 @@
 
             <h2>Video Stream</h2>
                 <div class="video">
-                    <img src="/video_feed1" alt="Camera 1 Stream" style="width: 100%; height: auto;">
-                    <img src="/video_feed2" alt="Camera 2 Stream" style="width: 100%; height: auto;">
+                    <img src="{{ url_for('video_feed1') }}">
+		    <img src="{{ url_for('video_feed2') }}">
                 </div>
         </div>
 

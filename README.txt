@@ -1,3 +1,6 @@
+#Install Venv
+python3 -m venv venv
+
 #To start
 source venv/bin/activate
 

@@ -171,13 +171,13 @@ def getFactorName(id):
     return "Unknown Factor"
 
 print("initilising start cameras")
-camera1 = cv2.VideoCapture(0)  # First camera
-camera2 = cv2.VideoCapture(2)  # Second camera
+camera1 = cv2.VideoCapture(2)  # First camera
+#camera2 = cv2.VideoCapture(2)  # Second camera
 
 camera1.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 camera1.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
-camera2.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+#camera2.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+#camera2.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
 
 print("done cameras")
 
@@ -199,10 +199,14 @@ def video_feed1():
     return Response(generate_frames(camera1),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-@app.route('/camera2')
-def video_feed2():
-    return Response(generate_frames(camera2),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
+#@app.route('/camera2')
+#def video_feed2():
+ #   return Response(generate_frames(camera2),
+  #                  mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/video.html')
+def serve_video():
+    return render_template('video.html')
 
 if __name__ == "__main__":
     init_db()  
